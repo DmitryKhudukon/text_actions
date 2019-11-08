@@ -68,20 +68,10 @@ const icons = {
   }
 }
 
-
-
-
-
-
-
 function Icon(props){
   let {name, fill, size, style, className} = props;
   let {path, width, height} = icons[name];
   if(!size) size = Math.max(width, height);
-
-//  let maxSize = width>height ? width : height;
-
-//  let proportion = size/maxSize;
 
   return (
     <svg

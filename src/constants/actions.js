@@ -1,0 +1,6 @@
+export const ADD_ACTION = 'ADD_ACTION';
+export const TOGGLE_ACTION = 'TOGGLE_ACTION';
+export const TOGGLE_ALL_ACTIONS = 'TOGGLE_ALL_ACTIONS';
+export const EDIT_ACTION = 'EDIT_ACTION';
+export const DELETE_ACTION = 'DELETE_ACTION';
+export const DELETE_ALL_ACTIONS = 'DELETE_ALL_ACTIONS';
