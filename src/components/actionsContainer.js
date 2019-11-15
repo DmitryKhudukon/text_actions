@@ -16,7 +16,6 @@ class ActionsContainer extends React.Component {
         <ActionUnit
           key = {action.id}
           action = {action}
-          addAction = {this.props.addAction}
           onChange={(...e) => {this.props.onChange(...e)}}
           delete = {this.props.deleteAction}
           actionToggle = {this.props.actionToggle}
@@ -49,7 +48,7 @@ class ActionsContainer extends React.Component {
         </div>
         <div className='actions-buttons'>
           <button
-            onClick={() => this.addAction()}
+            onClick={this.props.addAction}
           >
             <Icon name='plus' size="16" fill='#ADADAD'/>
           </button>

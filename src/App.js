@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from "react-helmet";
 import { createStore } from 'redux'
+import { connect, Provider } from 'react-redux';
 import './App.css';
 import Icon from './components/icons.js';
 import IconsPanel from './components/iconsPanel.js';
@@ -10,24 +11,19 @@ import ActionsContainer from './components/actionsContainer.js'
 import { copyClipboard } from './functions/copyClipboard.js';
 
 import {
-  EDIT_SOURCE,
-  EDIT_RESULT,
-  UPDATE_LINE_COUNTERS,
+  editSource,
+  editResult,
+  updateLineCounters,
 
-  ADD_ACTION,
-  TOGGLE_ACTION,
-  TOGGLE_ALL_ACTIONS,
-  EDIT_ACTION,
-  DELETE_ACTION,
-  DELETE_ALL_ACTIONS
-} from './constants';
+  addAction,
+  toggleAction,
+  toggleAllActions,
+  editAction,
+  deleteAction,
+  deleteAllActions
+} from './actions';
 
 import reducers from './reducers'
-
-// ACTIONS START
-const addAction = () => ({ type: ADD_ACTION })
-const toggleAction = id => ({ type: TOGGLE_ACTION, id })
-// ACTIONS END
 
 const store = createStore(reducers)
 const next = store.dispatch;
@@ -39,8 +35,9 @@ store.dispatch = function dispatchAndLog(action) {
 };
 
 let getResult = (state) => {
-    console.log('getResult = state => ', state)
-  let newState = state;
+  console.log('getResult = state => ', state)
+
+  let newState = Object.assign({}, state);
   let source = state.updatePanels.source;
   let newResult = source;
   let id = 0;
@@ -59,7 +56,6 @@ let getResult = (state) => {
       id++;
     })
   }
-
   newState.updatePanels.result=newResult;
   return newState;
 };
@@ -68,8 +64,10 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state={};
-    let state = getResult(store.getState());
-    store.dispatch({ type: EDIT_RESULT, result: state.result})
+
+    let state = getResult(this.props);
+    this.dispatch = this.props.dispatch;
+    this.dispatch(editResult(state.result))
   }
   componentDidMount(){
     setTimeout(() => this.renderCounters(), 0);
@@ -90,19 +88,19 @@ class App extends React.Component {
     let sourceScroll = sourceArea.scrollHeight>sourceParent ? true : false;
     let resultScroll = resultArea.scrollHeight>resultParent ? true : false;
 
-    store.dispatch({ type: UPDATE_LINE_COUNTERS, sourceRows, resultRows, sourceScroll, resultScroll })
-    this.setState({});
+    this.dispatch(updateLineCounters(sourceRows, resultRows, sourceScroll, resultScroll))
   }
+
   onChange(data) {
     let {source, result} = data;
     if(source) {
-      store.dispatch({ type: EDIT_SOURCE, source: source===true ? "" : source })
+      this.dispatch(editSource(source===true ? "" : source))
     }
     else if(result) {
-      store.dispatch({ type: EDIT_RESULT, result: result===true ? "" : result })
+      this.dispatch(editResult(result===true ? "" : result))
     }
     else {
-      store.dispatch({ type: EDIT_ACTION, ...data })
+      this.dispatch(editAction(data))
     }
     if(!result)this.updateResult();
 
@@ -110,31 +108,28 @@ class App extends React.Component {
     setTimeout(() =>this.renderCounters(), 0);
   }
   addAction(){
-    store.dispatch({ type: ADD_ACTION });
-    this.setState({})
+    this.dispatch(addAction());
+
   }
   deleteAction(id){
-    store.dispatch({ type: DELETE_ACTION, id: id});
+    this.dispatch(deleteAction(id));
     this.updateResult();
   }
   deleteAllActions(){
-    store.dispatch({ type: DELETE_ALL_ACTIONS});
+    this.dispatch(deleteAllActions());
     this.updateResult();
   }
   actionToggle(id){
-    store.dispatch({ type: TOGGLE_ACTION, id: id});
+    this.dispatch(toggleAction(id));
     this.updateResult();
   }
   toggleAllActions(){
-    store.dispatch({ type: TOGGLE_ALL_ACTIONS });
+    this.dispatch(toggleAllActions());
     this.updateResult();
   }
   updateResult(){
-    let state = store.getState();
-    let newState = getResult(state);
-    let result = newState.updatePanels.result;
-    store.dispatch({ type: EDIT_RESULT, result })
-    this.setState({});
+    let newState = getResult(this.props);
+    this.dispatch(editResult(newState.updatePanels.result))
   }
   scrollAreas(e){
     let sourceArea = document.querySelector('.source-area_container');
@@ -145,9 +140,10 @@ class App extends React.Component {
 
 
   render(){
-    let {updatePanels} = store.getState();
+    let {actionsActive, updateActions, updatePanels} = this.props;
     let {source, result} = updatePanels;
     console.log('App source, result', source, result)
+    console.log('App render props:', this.props)
     return (
       <React.Fragment>
       <div className="App">
@@ -158,8 +154,8 @@ class App extends React.Component {
         </Helmet>
         <IconsPanel />
         <ActionsContainer
-          actions = {store.getState().updateActions.actions}
-          actionsActive = {store.getState().actionsActive}
+          actions = {updateActions.actions}
+          actionsActive = {actionsActive}
           addAction = {() => this.addAction()}
           actionToggle = {e=> this.actionToggle(e)}
           deleteAction = {e=> this.deleteAction(e)}
@@ -170,16 +166,16 @@ class App extends React.Component {
         <SourceArea
           key = 'SourceArea'
           value={source}
-          rows = {store.getState().updatePanels.resultRows}
-          scroll = {store.getState().updatePanels.sourceScroll}
+          rows = {updatePanels.resultRows}
+          scroll = {updatePanels.sourceScroll}
           scrollAreas={e => this.scrollAreas(e)}
           onChange={(...e) => {this.onChange(...e)}}
         />
         <ResultArea
           key = 'ResultArea'
           value={result}
-          rows = {store.getState().updatePanels.resultRows}
-          scroll = {store.getState().updatePanels.resultScroll}
+          rows = {updatePanels.resultRows}
+          scroll = {updatePanels.resultScroll}
 
           scrollAreas={e => this.scrollAreas(e)}
           onChange={(...e) => {this.onChange(...e)}}
@@ -189,5 +185,22 @@ class App extends React.Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    updatePanels: state.updatePanels,
+    updateActions: state.updateActions,
+    actionsActive: state.actionsActive
+  }
+}
+const Wrapp = connect(mapStateToProps)(App);
 
-export default App;
+function WrappedApp(){
+  return(
+    <Provider store={store}>
+      <Wrapp />
+    </Provider>
+  )
+
+};
+
+export default WrappedApp;
