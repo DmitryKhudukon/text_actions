@@ -272,7 +272,7 @@ padding: 2px 14px;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   position:fixed;
-  bottom:-30px;
+  top:185px;
   left:-5px;
 }
 @media not all and (min-resolution:.001dpcm)
@@ -288,7 +288,11 @@ padding: 2px 14px;
   bottom:0;
   left:0;
   width:40px;
-  height: 60px;
+}
+#about_button{
+  background: transparent;
+  border:0;
+  cursor:pointer;
 }
 .source-area_container,
 .result-area_container{
