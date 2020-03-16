@@ -1,5 +1,6 @@
 {
   "name": "textactions",
+  "homepage": "https://textactions.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,7 +12,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "cypress open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

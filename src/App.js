@@ -366,7 +366,6 @@ class ActionUnit extends React.Component {
         <div className="find-textarea_wrapper">
           <textarea
             className='find-input'
-            data-cy={"find-input-" + id}
             value = {find}
             placeholder = 'Find RegExp…'
             onChange={e => this.onChange(id, 'find', e)}
@@ -375,7 +374,6 @@ class ActionUnit extends React.Component {
         <div className="find-textarea_wrapper">
           <textarea
             className='replace-input'
-            data-cy={"replace-input-" + id}
             value = {replace}
             placeholder = 'Replace with…'
             onChange={e => this.onChange(id, 'replace', e)}
@@ -486,7 +484,6 @@ class SourceArea extends React.Component {
           key="source-area"
           value={this.props.value}
           onChange = {e => {this.props.onChange({source: e.target.value || true})}}
-          data-cy="source-textfield"
         />
       </div>
     )
@@ -565,7 +562,6 @@ class ResultArea extends React.Component {
           wrap = 'off'
           className="result-area"
           value={this.props.value}
-          data-cy="result-textfield"
           onChange = {e => {this.props.onChange({result: e.target.value || true})}}
         />
       </div>
@@ -597,34 +593,17 @@ function AboutIntro(props){
           <div id='about_intro_content'>
             <IntroIllustration />
             <h1>
-              <b>Text Actions</b> — is open source experimental text editor, based on
+              <b>Text Actions</b> — is experimental text transformer, based on
               {' '}<a
                 href='https://en.wikipedia.org/wiki/Regular_expression'
                 target='_blank'
                 rel='noopener noreferrer'
               >
                 regular expressions
-              </a>{' '}
-               <b>text transformations</b> without text formatting.
+              </a>.
             </h1>
             <div id='about_intro_footer'>
-              <div>Author:
-                <a
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  href = 'https://twitter.com/dmitrykhudukon'
-                >
-                  Dmitry Khudukon</a>
-              </div>
-              <div>Github:
-                <a
-                  href = 'https://github.com/DmitryKhudukon/ta'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  TextActions repository
-                </a>
-              </div>
+             Copywright © textactions.com
             </div>
           </div>
         </div>
@@ -650,20 +629,6 @@ class LeftPanel extends React.Component {
           >
             <Icon name='question-circle' size="18" fill='#fff' style={{margin:'15px 10px 0 10px'}}/>
           </button>
-          <a
-            href = 'https://github.com/DmitryKhudukon/ta'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <Icon name='github' size="18" fill='#fff' style={{margin:'15px 10px 0 10px'}}/>
-          </a>
-          <a
-            href = 'https://twitter.com/dmitrykhudukon'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <Icon name='twitter' size="18" fill='#fff' style={{margin:'15px 10px 15px 10px'}}/>
-          </a>
         </div>
       </div>
     )

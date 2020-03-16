@@ -293,6 +293,7 @@ padding: 2px 14px;
   background: transparent;
   border:0;
   cursor:pointer;
+  padding-bottom: 10px;
 }
 .source-area_container,
 .result-area_container{
@@ -412,9 +413,8 @@ padding: 2px 14px;
   top:5px;
 }
 #about_intro_footer{
+  width:100%;
+  font-size: 14px;
   display:grid;
-  grid-template-columns: repeat(2, auto);
-}
-#about_intro_footer a{
-  color:black;
+  place-items:center;
 }
