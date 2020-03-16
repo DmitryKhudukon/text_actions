@@ -389,6 +389,10 @@ padding: 2px 14px;
   padding:10px;
   position: relative;
 }
+#about_intro_header > span {
+  color:#999;
+  font-size: 12px;
+}
 #about_intro_content{
   padding: 50px;
 }
