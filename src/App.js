@@ -5,7 +5,13 @@ import Logo from './assets/logo.js'
 import IntroIllustration from './assets/intro_illustration.js';
 import Icon from './components/icon.js';
 
-const initialSource = {source: JSON.parse(localStorage.getItem('source')).replace(/\\n/gi, '\n').replace(/\\t/gi, '\t').replace(/\\r/gi, '\r').replace(/\\f/gi, '\f').replace(/\\0/gi, '\0') || '', sourceRows: 1}
+
+let source = '';
+if (localStorage.getItem('source')){
+    source = JSON.parse(localStorage.getItem('source')).replace(/\\n/gi, '\n').replace(/\\t/gi, '\t').replace(/\\r/gi, '\r').replace(/\\f/gi, '\f').replace(/\\0/gi, '\0')
+}
+
+const initialSource = {source: source, sourceRows: 1}
 const initialResult = {result: '', resultRows: 1}
 const blankAction = [
   {
@@ -602,6 +608,14 @@ function AboutIntro(props){
                 regular expressions
               </a>.
             </h1>
+
+            <small>
+             Thanks to <a
+               href='https://fontawesome.com/'
+               target='_blank'
+               rel='noopener noreferrer'
+             >Font Awesome</a> for great icons!
+            </small>
             <div id='about_intro_footer'>
              Copywright © textactions.com
             </div>
