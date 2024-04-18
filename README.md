@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Text Actions is an experimental text editor that is designed to simplify and automate the process of editing and formatting large texts or code, making it a valuable resource for developers, writers, and anyone needing to perform complex text manipulations efficiently.
 
-## Available Scripts
+The last version of the prototype is deployed here:
+http://textactions.com/
 
-In the project directory, you can run:
+**Text Actions App Features:**
+1. Bulk Text Replacement
+Allows for mass replacement of text strings or individual characters using regular expressions.
 
-### `npm start`
+2. Dual Text Fields
+Features two text fields - one for the source text and another for the result, displaying changes in real-time.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+3. Regular Expression Support
+Users can input regular expressions to specify patterns for text replacement.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+4. Adjustable Replacement Count
+Users can increase or decrease the number of replacements to be made.
 
-### `npm test`
+5. Line Number Highlighting
+Both text fields have line numbering for easy reference and comparison.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+6. Dynamic Line Count
+The number of lines in the source and result can differ based on the replacements made.
 
-### `npm run build`
+7. Replacement Statistics
+Displays the number of times a particular string was found and replaced.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+8. Copy Functionality
+Allows users to copy text from either the source or the result fields.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+9. Clear Functionality
+Users can clear text from either the source or the result fields.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+10. Synchronized Scrolling
+When scrolling through one text area, the other scrolls simultaneously for synchronized viewing.
 
-### `npm run eject`
+11. Automatic Updates
+Any changes in the source text field automatically update the result text field.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+12. Deletion of Actions
+Users can delete specific replacement actions if needed.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+13. Usability for Code and Text Blocks
+Useful for editing code or large blocks of text, removing unnecessary characters or formatting.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+14. Potential for Saving Regular Expression Sets
+Future improvements might include the ability to save sets of regular expressions for repeated use.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+15. Statistical Analysis
+Future enhancements could include statistics on character, symbol, and digit counts within the text.
